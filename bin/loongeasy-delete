@@ -1,0 +1,78 @@
+#!/usr/bin/env node
+ 
+const inquirer = require('inquirer')
+const chalk = require('chalk')
+const fs = require('fs')
+const tplListP = require(`${__dirname}/../templatePC`)
+const tplListM = require(`${__dirname}/../templateMobile`)
+let opt ={
+  name:"",
+  tplList:[]
+}
+let question1 = [{
+  name: "platform",
+  type: 'list',
+  message: "请选择使用场景",
+  choices:[{name:"开发PC端项目",value:"pc"},{name:"开发移动端项目",value:"mobile"}]
+}
+]
+
+let question2 = [
+ {
+ name: "name",
+ message: "请输入要删除的模板名称",
+ validate (val) {
+  if (val === '') {
+  return '名称不能为空!'
+  }
+  let res=false
+  opt.tplList.map(template=>{
+    if(template['name'] === val){
+        res= true
+    }
+  })
+  if(res){
+    return true
+  }else{
+    return '无此模板!'
+  }
+ }
+ }
+]
+
+inquirer.prompt(question1).then(answers1 => {
+   // answers是所有问题的答案
+   let {platform} = answers1; 
+   if(platform=='pc'){
+    opt.name="templatePC.json"
+    opt.tplList=tplListP
+  }else if(platform=='mobile'){
+    opt.name="templateMobile.json"
+    opt.tplList=tplListM
+  }else{
+    console.log(`exit`)
+    return;
+  }
+  inquirer.prompt(question2).then(answers2 => {
+    let { name } = answers2;
+    let arr=[]
+    opt.tplList.map(template=>{
+       if(template['name'] !== name){
+           arr.push(template)
+       }
+     })
+    // 更新 template.json 文件
+    fs.writeFile(`${__dirname}/../${opt.name}`, JSON.stringify(arr), 'utf-8', err => {
+     if (err) console.log(err)
+     console.log('\n')
+     console.log(chalk.green('删除成功!\n'))
+     console.log(chalk.grey('可用模板如下: \n'))
+     arr.map(template=>{
+       console.log(chalk.green(`模板名称: ${template.name}`))
+       console.log(`模板介绍: ${template.description}\n`)
+     })
+     console.log('\n')
+    })
+    })
+
+})

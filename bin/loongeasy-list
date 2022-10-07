@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+ 
+// 修改控制台字符串的样式
+const chalk = require('chalk')
+const tplListP = require(`${__dirname}/../templatePC`)
+const tplListM = require(`${__dirname}/../templateMobile`)
+  console.log(chalk.red(`PC端模板:`))
+  tplListP.map(template=>{
+    console.log(chalk.green(`模板名称: ${template.name}`))
+    console.log(`模板介绍: ${template.description}\n`)
+  })
+  console.log(chalk.red(`移动端端模板:`))
+  tplListM.map(template=>{
+    console.log(chalk.green(`模板名称: ${template.name}`))
+    console.log(`模板介绍: ${template.description}\n`)
+  })

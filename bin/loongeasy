@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+const program = require('commander')
+ 
+// 定义当前版本
+// 定义使用方法
+// 定义五个指令
+program
+ .version(require('../package').version)
+ .usage('<command> [options]')
+ .command('create', '创建工程')
+ .command('add', '添加一个新模板')
+ .command('delete', '删除模板')
+ .command('list', '查看所有可用模板')
+ .command('init', '创建一个基于模板的工程')
+  
+// 解析命令行参数
+program.parse(process.argv)

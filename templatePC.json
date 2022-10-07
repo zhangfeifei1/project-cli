@@ -1,0 +1,21 @@
+[{
+    "name": "loongeasy-console-businessClean",
+    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/loongeasy-console-businessClean",
+    "description": "PC端业务后管工程（新风格）"
+}, {
+    "name": "loongeasy-console-businessClean-old",
+    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/loongeasy-console-businessClean-old",
+    "description": "PC端业务后管工程（原风格）"
+},{
+    "name": "loongeasy-console-1.2.0RC3-dist",
+    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/loongeasy-console-1.2.0RC3-dist",
+    "description": "技术后管部署包-------基于dev分支的最新代码（验证码+新用户+数据标准）"
+},{
+    "name": "project-pc-seed",
+    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/project-pc-seed",
+    "description": "PC端种子工程（elementUI）"
+},{
+    "name": "loongeasy-h5lib-pc",
+    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/loongeasy-h5lib-pc",
+    "description": "loongeasy组件第一版（前后端统一校验数据标准组件系统）"
+}]

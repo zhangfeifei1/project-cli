@@ -1,0 +1,105 @@
+#!/usr/bin/env node
+ 
+// 交互式命令行
+const inquirer = require('inquirer')
+// 修改控制台字符串的样式
+const chalk = require('chalk')
+// node 内置文件模块
+const fs = require('fs')
+// 读取根目录下的 template.json
+const tplListP = require(`${__dirname}/../templatePC`)
+const tplListM = require(`${__dirname}/../templateMobile`)
+ 
+// 自定义交互式命令行的问题及简单的校验
+let question1 = [{
+  name: "platform",
+  type: 'list',
+  message: "请选择使用场景",
+  choices:[{name:"开发PC端项目",value:"pc"},{name:"开发移动端项目",value:"mobile"}]
+}
+]
+
+let question2 = [
+ {
+ name: "name",
+ type: 'input',
+ message: "请输入模板工程名称",
+ validate (val) {
+  if (val === '') {
+  return '名称不能为空！'
+  } 
+  let res=true
+  tplListP.map(template=>{
+    if(template['name'] === val){
+        res= false
+    }
+  })
+  if(res){
+    return true
+  }else{
+    return '该名字已存在!'
+  }
+ }
+ },
+ {
+ name: "url",
+ type: 'input',
+ message: "请输入模板工程地址(格式如下: github:penghaochen/test或https://github.com/penghaochen/test.git)",
+ validate (val) {
+  if (val === '') return '地址不能为空!'
+  return true
+ }
+ },
+ {
+    name: "description",
+    type: 'input',
+    message: "请输入新增模板工程介绍",
+    validate (val) {
+     if (val === '') return '介绍不能为空!'
+     return true
+    }
+    }
+]
+
+
+inquirer.prompt(question1).then(answers1 => {
+  // answers是所有问题的答案
+  let {platform} = answers1;
+  let opt ={
+    name:"",
+    tplList:[]
+  }
+  if(platform=='pc'){
+    opt.name="templatePC.json"
+    opt.tplList=tplListP
+  }else if(platform=='mobile'){
+    opt.name="templateMobile.json"
+    opt.tplList=tplListM
+  }else{
+    console.log(`exit`)
+    return;
+  }
+  inquirer.prompt(question2).then(answers2 => {
+    // answers 就是用户输入的内容，是个对象
+    let { name, url ,description} = answers2;
+    // 过滤 unicode 字符
+   //  tplListP[name] = url.replace(/[\u0000-\u0019]/g, '')
+   opt.tplList.push({
+        "name":name,
+        "url":url.replace(/[\u0000-\u0019]/g, ''),
+        "description":description
+    })
+    // 把模板信息写入 template.json 文件中
+    fs.writeFile(`${__dirname}/../${opt.name}`, JSON.stringify(opt.tplList), 'utf-8', err => {
+     if (err) console.log(err)
+     console.log('\n')
+     console.log(chalk.green('新增成功!\n'))
+     console.log(chalk.grey('可用模板如下: \n'))
+     opt.tplList.map(template=>{
+       console.log(chalk.green(`模板名称: ${template.name}`))
+       console.log(`模板介绍: ${template.description}\n`)
+     })
+     console.log('\n')
+    })
+    })
+})
