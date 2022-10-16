@@ -1,13 +1,13 @@
 [{
     "name": "project-mobile-base",
-    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/project-mobile-base",
-    "description": "微信银行前端基础工程"
+    "url": "github:https://github.com:zhangfeifei1/project-mobile-base",
+    "description": "移动端基础工程"
 },{
     "name": "project-mobile-seed",
-    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/project-mobile-seed",
-    "description": "基于vantUI的移动端种子工程(H5)"
+    "url": "github:https://github.com:zhangfeifei1/project-mobile-seed",
+    "description": "移动端种子工程(使用vantUI)"
 },{
     "name": "project-pad-seed",
-    "url": "gitlab:http://103.160.25.35:32002:loongeasy-cli/project-pad-seed",
-    "description": "基于elementUI移动端种子工程(Pad)"
+    "url": "github:https://github.com:zhangfeifei1/project-pad-seed",
+    "description": "PAD端种子工程(使用elementUI)"
 }]

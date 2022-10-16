@@ -1,7 +1,7 @@
 {
-  "name": "loongeasy-cli",
-  "version": "1.1.1",
-  "description": "phc create loongeasy-cli for loongeasy company ",
+  "name": "feifei-project-cli",
+  "version": "0.0.8",
+  "description": "config projects tool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

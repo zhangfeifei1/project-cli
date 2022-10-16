@@ -1,8 +1,8 @@
-# loongeasy-cli 
-龙盈智达前端项目构建工具
+# feifei-project-cli
+前端项目构建工具
 ## Install
 ```
-  npm i loongeasy-cli -g
+  npm i feifei-project-cli -g
 ```
 ## Usage
 ### loongeasy create
